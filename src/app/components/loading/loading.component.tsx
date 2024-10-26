@@ -6,7 +6,7 @@ export function Loading() {
   const barVariants = {
     initial: { height: 0 },
     animate: (i: number) => ({
-      height: ['20%', '100%', '20%'][i % 3],
+      height: ['100%', '20%', '20%', '100%'][i % 3],
       transition: {
         duration: 1,
         ease: 'easeInOut',
