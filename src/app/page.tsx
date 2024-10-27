@@ -1,5 +1,5 @@
-import { Loading } from '~/components/loading'
+import { InvestmentPlanForm } from '~/components/investment-plan-form'
 
-export default function Home() {
-  return <Loading />
+export default function HomePage() {
+  return <InvestmentPlanForm />
 }
