@@ -20,7 +20,7 @@ export function DCAView() {
   const [selected, setSelected] = useState(people[0])
 
   return (
-    <div className="min-h-screen bg-[#0a192f] text-white">
+    <div className="min-h-screen bg-[#0a192f] text-white fade-in">
       <header className="p-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
           <img
