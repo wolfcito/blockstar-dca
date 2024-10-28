@@ -29,10 +29,16 @@ export function InvestmentPlanForm() {
 
   const updateStrategy = async () => {
     const numericAmount = Number(amount)
+    if (!planName || planName.trim() === '') {
+      console.error('Invalid plan name: cannot be empty')
+      alert('Invalid plan name: cannot be empty')
+      return
+    }
     if (isNaN(numericAmount) || numericAmount < 0.1) {
       console.error(
         'Invalid amount: must be a number greater than or equal to 0.1',
       )
+      alert('Invalid amount: must be a number greater than or equal to 1')
       return
     }
 
@@ -42,18 +48,13 @@ export function InvestmentPlanForm() {
       return
     }
 
-    if (!planName || planName.trim() === '') {
-      console.error('Invalid plan name: cannot be empty')
-      return
-    }
-
     try {
       const result = await updatePlan(numericAmount, frequency, planName, true)
-      setShowSuccess(true)
       console.log('Update successful:', result)
     } catch (error) {
       console.error('Error updating strategy:', error)
     }
+    setShowSuccess(true)
   }
 
   const handleAmountChange = (event: any) => {
@@ -99,7 +100,11 @@ export function InvestmentPlanForm() {
       </h1>
       <div className="bg-[#06101A] p-6 max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Create your DCA's plan</h2>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+          }}
+        >
           <div className="space-y-6">
             <div>
               <label
