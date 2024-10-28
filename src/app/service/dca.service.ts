@@ -73,15 +73,15 @@ export async function getWBTCAddress(): Promise<string> {
 
 // Transactional functions
 export async function deposit(): Promise<VottunResponse> {
-  return await queryContract('deposit', [])
+  return await sendTransaction('deposit')
 }
 
 export async function depositToken(amount: number): Promise<VottunResponse> {
-  return await queryContract('depositToken', [amount])
+  return await sendTransaction('depositToken', [amount.toString()])
 }
 
 export async function executeDCA(recipient: string): Promise<VottunResponse> {
-  return await queryContract('executeDCA', [recipient])
+  return await sendTransaction('executeDCA', [recipient])
 }
 
 export async function updatePlan(
@@ -90,9 +90,9 @@ export async function updatePlan(
   planName: string,
   useETH: boolean,
 ): Promise<VottunResponse> {
-  return await queryContract('updatePlan', [
-    amountPerPeriod,
-    interval,
+  return await sendTransaction('updatePlan', [
+    amountPerPeriod.toString(),
+    interval.toString(),
     planName,
     useETH,
   ])
@@ -100,4 +100,34 @@ export async function updatePlan(
 
 interface VottunResponse {
   data: any
+}
+
+const VOTTUN_MUTABLE_API_URL =
+  'https://api.vottun.tech/core/v1/evm/transact/mutable'
+
+async function sendTransaction(
+  method: string,
+  params: any[] = [],
+  value: string = '0', // Optional value in wei for sending ETH
+): Promise<VottunResponse> {
+  try {
+    const response = await axios.post(
+      VOTTUN_MUTABLE_API_URL,
+      {
+        contractAddress: BLOCKSTAR_CONTRACT,
+        contractSpecsId: 12240,
+        blockchainNetwork: 421614,
+        sender: SENDER_ADDRESS,
+        method,
+        params,
+        value,
+      },
+      { headers: HEADERS },
+    )
+    console.log(`${method} transaction response:`, response.data)
+    return response.data
+  } catch (error) {
+    console.error(`Error executing ${method} transaction:`, error)
+    throw error
+  }
 }

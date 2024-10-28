@@ -9,6 +9,7 @@ import {
 } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { DCASuccess } from '~/components/plan-confirmation'
+import { updatePlan } from '~/app/service'
 
 const people = [
   {
@@ -18,9 +19,72 @@ const people = [
   },
 ]
 
+const DAILY = 86400
 export function InvestmentPlanForm() {
   const [selected, setSelected] = useState(people[0])
   const [showSuccess, setShowSuccess] = useState(false)
+  const [planName, setPlanName] = useState('')
+  const [frequency, setFrequency] = useState(DAILY)
+  const [amount, setAmount] = useState('')
+
+  const updateStrategy = async () => {
+    const numericAmount = Number(amount)
+    if (isNaN(numericAmount) || numericAmount < 0.1) {
+      console.error(
+        'Invalid amount: must be a number greater than or equal to 0.1',
+      )
+      return
+    }
+
+    const validFrequencies = [3600, 86400, 604800, 2592000]
+    if (!validFrequencies.includes(frequency)) {
+      console.error('Invalid frequency: must be one of the predefined values')
+      return
+    }
+
+    if (!planName || planName.trim() === '') {
+      console.error('Invalid plan name: cannot be empty')
+      return
+    }
+
+    try {
+      const result = await updatePlan(numericAmount, frequency, planName, true)
+      setShowSuccess(true)
+      console.log('Update successful:', result)
+    } catch (error) {
+      console.error('Error updating strategy:', error)
+    }
+  }
+
+  const handleAmountChange = (event: any) => {
+    const value = event.target.value
+
+    if (!isNaN(value) && parseFloat(value) >= 0.1) {
+      setAmount(value)
+    } else if (value === '') {
+      setAmount('')
+    }
+  }
+
+  const handleFrequencyChange = (event: any) => {
+    const value = event.target.value
+    switch (value) {
+      case 'hourly':
+        setFrequency(3600)
+        break
+      case 'daily':
+        setFrequency(86400)
+        break
+      case 'weekly':
+        setFrequency(604800)
+        break
+      case 'monthly':
+        setFrequency(2592000)
+        break
+      default:
+        setFrequency(86400)
+    }
+  }
 
   if (showSuccess) {
     return <DCASuccess />
@@ -48,6 +112,8 @@ export function InvestmentPlanForm() {
                 id="plan-name"
                 className="w-full bg-[#0a192f] border-[#f26419] text-white placeholder-gray-500 p-2 outline outline-[#f26419]"
                 placeholder="Create a plan here (Optional)"
+                value={planName}
+                onChange={(e) => setPlanName(e.target.value)}
               />
             </div>
             <div>
@@ -55,9 +121,8 @@ export function InvestmentPlanForm() {
                 Coin Allocation (100% / 100%)
               </label>
               <div className="flex items-center space-x-2 p-2 bg-[#0a192f] border border-[#f26419]">
-                {/* <Bitcoin className="text-[#f26419]" size={24} /> */}
-                <img src="/img/btc.png" className="w-6 h-6" alt="btc" />
-                <span className="flex-grow">BTC</span>
+                <img src="/img/eth.svg" className="w-6 h-6" alt="eth" />
+                <span className="flex-grow">ETH</span>
                 <span>100 %</span>
               </div>
             </div>
@@ -73,6 +138,8 @@ export function InvestmentPlanForm() {
                   id="amount"
                   className="w-full bg-[#0a192f] border-[#f26419] text-white placeholder-gray-500 p-2 outline outline-[#f26419]"
                   placeholder="The minimum amount is 0.1 USDT"
+                  value={amount}
+                  onChange={handleAmountChange}
                 />
               </div>
               <div className="flex flex-col">
@@ -141,13 +208,22 @@ export function InvestmentPlanForm() {
               <select
                 id="frequency"
                 name="frequency"
-                defaultValue="Time, day, hour"
+                value={
+                  frequency === 3600
+                    ? 'hourly'
+                    : frequency === 86400
+                    ? 'daily'
+                    : frequency === 604800
+                    ? 'weekly'
+                    : 'monthly'
+                }
+                onChange={handleFrequencyChange}
                 className="w-full bg-[#0a192f] border-[#f26419] text-white p-2.5 outline outline-[#f26419]"
               >
-                <option value={'hourly'}>Hourly</option>
-                <option value={'daily'}>Daily</option>
-                <option value={'weekly'}>Weekly</option>
-                <option value={'monthly'}>Monthly</option>
+                <option value="hourly">Hourly</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
               </select>
             </div>
           </div>
@@ -157,7 +233,7 @@ export function InvestmentPlanForm() {
             </button>
             <button
               className="bg-[#f26419] hover:bg-[#f26419]/90 text-white px-4 py-2"
-              onClick={() => setShowSuccess(true)}
+              onClick={updateStrategy}
             >
               Next
             </button>
