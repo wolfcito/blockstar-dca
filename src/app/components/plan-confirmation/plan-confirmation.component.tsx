@@ -14,16 +14,17 @@ export function DCASuccess() {
   }
 
   return (
-    <div className="flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-[#06101A] text-white border-none shadow-xl rounded-none">
+    <div className="flex items-center justify-center p-4 flex-col">
+      <h2 className="text-4xl font-bold text-center mb-8">
+        Properly scheduled planning
+      </h2>
+
+      <Card className="w-full max-w-2xl bg-[#06101A] text-white border-none shadow-xl rounded-none mx-auto p-8">
         <CardContent className="pt-6">
           <div className="flex justify-center mb-4">
             <CheckCircle2 className="w-16 h-16 text-green-400" />
           </div>
-          <h2 className="text-2xl font-semibold text-center mb-6">
-            Properly scheduled planning
-          </h2>
-          <div className="space-y-2 text-sm">
+          <div className="space-y-4">
             <div className="flex justify-between">
               <span className="text-gray-400">Creation Date</span>
               <span>2024-10-27 12:45</span>
