@@ -15,12 +15,12 @@ export function DCASuccess() {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-[#1e2a3a] text-white border-none shadow-xl rounded-none">
+      <Card className="w-full max-w-md bg-[#06101A] text-white border-none shadow-xl rounded-none">
         <CardContent className="pt-6">
           <div className="flex justify-center mb-4">
             <CheckCircle2 className="w-16 h-16 text-green-400" />
           </div>
-          <h2 className="text-2xl font-bold text-center mb-6">
+          <h2 className="text-2xl font-semibold text-center mb-6">
             Properly scheduled planning
           </h2>
           <div className="space-y-2 text-sm">

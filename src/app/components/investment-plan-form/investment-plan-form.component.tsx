@@ -33,7 +33,7 @@ export function InvestmentPlanForm() {
         <br />
         how to invest wisely
       </h1>
-      <div className="bg-[#0f2744] p-8 rounded-lg max-w-2xl mx-auto">
+      <div className="bg-[#06101A] p-8 rounded-lg max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Create your DCA's plan</h2>
         <form>
           <div className="space-y-6">
