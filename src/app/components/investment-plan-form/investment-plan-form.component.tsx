@@ -33,7 +33,7 @@ export function InvestmentPlanForm() {
         <br />
         how to invest wisely
       </h1>
-      <div className="bg-[#06101A] p-8 rounded-lg max-w-2xl mx-auto">
+      <div className="bg-[#06101A] p-6 max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Create your DCA's plan</h2>
         <form>
           <div className="space-y-6">
@@ -61,11 +61,11 @@ export function InvestmentPlanForm() {
                 <span>100 %</span>
               </div>
             </div>
-            <div className="flex space-x-4">
-              <div className="flex-grow">
+            <div className="flex lg:space-x-4 flex-col lg:flex-row gap-2">
+              <div className="flex flex-col flex-1">
                 <label
                   htmlFor="amount"
-                  className="block text-sm font-medium mb-2"
+                  className="block text-sm font-medium mt-5 mb-2"
                 >
                   Amount Per Period
                 </label>
@@ -75,13 +75,13 @@ export function InvestmentPlanForm() {
                   placeholder="The minimum amount is 0.1 USDT"
                 />
               </div>
-              <div className="w-1/4">
-                <label className="block text-sm font-medium mb-2">
+              <div className="flex flex-col">
+                <label className="text-sm font-medium mt-3 mb-1">
                   Available: 122 USDT
                 </label>
                 <Listbox value={selected} onChange={setSelected}>
                   <div className="relative mt-2">
-                    <ListboxButton className="w-full cursor-default text-white py-2.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset ring-[#f26419] focus:outline-none focus:ring-2 focus:ring-[#f26419] sm:leading-6 ">
+                    <ListboxButton className="w-full cursor-default text-white py-2.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-inset ring-[#f26419] focus:outline-none focus:ring-2 focus:ring-[#f26419] sm:leading-6">
                       <span className="flex items-center">
                         <img
                           alt=""

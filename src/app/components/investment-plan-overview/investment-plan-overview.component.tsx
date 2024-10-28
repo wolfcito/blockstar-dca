@@ -3,12 +3,12 @@ import { HelpCircle } from 'lucide-react'
 
 export function InvestmentPlanOverview() {
   return (
-    <div className="max-w-2xl mx-auto text-white p-4">
+    <div className="max-w-2xl mx-auto text-white">
       <h1 className="text-4xl font-bold text-center mb-8">
         My Automatic Investment Plan
       </h1>
 
-      <Card className="bg-[#06101A] border-none rounded-none max-w-2xl  mx-auto p-8">
+      <Card className="bg-[#06101A] border-none rounded-none max-w-2xl  mx-auto">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="font-medium flex items-center gap-2 flex-col text-white">
             <div className="text-2xl font-semibold mb-6">My Portfolio</div>
@@ -36,7 +36,7 @@ export function InvestmentPlanOverview() {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Unrealized Gains and Losses</span>
-              <span>0.00 USD</span>
+              <span className="text-end">0.00 USD</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Status</span>

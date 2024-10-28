@@ -14,12 +14,12 @@ export function DCASuccess() {
   }
 
   return (
-    <div className="flex items-center justify-center p-4 flex-col">
+    <div className="flex items-center justify-center flex-col">
       <h2 className="text-4xl font-bold text-center mb-8">
         Properly scheduled planning
       </h2>
 
-      <Card className="w-full max-w-2xl bg-[#06101A] text-white border-none shadow-xl rounded-none mx-auto p-8">
+      <Card className="w-full max-w-2xl bg-[#06101A] text-white border-none shadow-xl rounded-none mx-auto">
         <CardContent className="pt-6">
           <div className="flex justify-center mb-4">
             <CheckCircle2 className="w-16 h-16 text-green-400" />
