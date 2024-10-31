@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BLOCKSTAR_CONTRACT = '0x4e249d054475d2b4cb11ef5b7ba25fe26e64c056'
+const BLOCKSTAR_CONTRACT = '0xc760B2a742618AdE9eBFb49023eDF4DfcC6E208d'
 const SENDER_ADDRESS = '0x8306a15c09e4704c340a58Af451E640E7D399a1e'
 
 const VOTTUN_VIEW_API_URL = 'https://api.vottun.tech/core/v1/evm/transact/view'
