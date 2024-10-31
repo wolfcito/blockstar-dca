@@ -1,22 +1,29 @@
 import axios from 'axios'
 
-const BLOCKSTAR_CONTRACT = '0x4e249d054475d2b4cb11ef5b7ba25fe26e64c056' // '0xc760B2a742618AdE9eBFb49023eDF4DfcC6E208d'
+const BLOCKSTAR_CONTRACT = '0x4e249d054475d2b4cb11ef5b7ba25fe26e64c056'
 const SENDER_ADDRESS = '0x8306a15c09e4704c340a58Af451E640E7D399a1e'
 
-const VOTTUN_API_URL = 'https://api.vottun.tech/core/v1/evm/transact/view'
+const VOTTUN_VIEW_API_URL = 'https://api.vottun.tech/core/v1/evm/transact/view'
+const VOTTUN_MUTABLE_API_URL =
+  'https://api.vottun.tech/core/v1/evm/transact/mutable'
 const HEADERS = {
   'Content-Type': 'application/json',
   Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
   'x-application-vkn': process.env.NEXT_PUBLIC_APP_ID,
 }
 
+interface VottunResponse {
+  data: any
+}
+
+// View function
 async function queryContract(
   method: string,
   params: any[] = [],
 ): Promise<VottunResponse> {
   try {
     const response = await axios.post(
-      VOTTUN_API_URL,
+      VOTTUN_VIEW_API_URL,
       {
         contractAddress: BLOCKSTAR_CONTRACT,
         contractSpecsId: 12240,
@@ -27,7 +34,7 @@ async function queryContract(
       },
       { headers: HEADERS },
     )
-    console.log(`${method} response:`, response.data)
+    console.log(`${method} response:`, response)
     return response
   } catch (error) {
     console.error(`Error fetching ${method}:`, error)
@@ -35,7 +42,42 @@ async function queryContract(
   }
 }
 
-// Individual functions with TypeScript types for each query and action
+// Transaction function
+async function sendTransaction(
+  method: string,
+  params: any[] = [],
+  value: number = 0, // Specify value as an integer in wei
+): Promise<VottunResponse> {
+  try {
+    const response = await axios.post(
+      VOTTUN_MUTABLE_API_URL,
+      {
+        contractAddress: BLOCKSTAR_CONTRACT,
+        contractSpecsId: 12240,
+        blockchainNetwork: 421614,
+        sender: SENDER_ADDRESS,
+        method,
+        params,
+        value, // Now using an integer for value
+      },
+      { headers: HEADERS },
+    )
+    console.log(`${method} transaction response:`, response)
+    return response
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        `Error executing ${method} transaction:`,
+        error.response?.data || error.message,
+      )
+    } else {
+      console.error(`Error executing ${method} transaction:`, error)
+    }
+    throw error
+  }
+}
+
+// Individual functions
 export async function getOwner(): Promise<string> {
   const result = await queryContract('owner')
   return result.data
@@ -73,7 +115,9 @@ export async function getWBTCAddress(): Promise<string> {
 
 // Transactional functions
 export async function deposit(): Promise<VottunResponse> {
-  return await sendTransaction('deposit')
+  // Example with value (sending 0.1 ETH)
+  const valueInWei = Math.floor(0.1 * 1e18) // 0.1 ETH in wei as an integer
+  return await sendTransaction('deposit', [], valueInWei)
 }
 
 export async function depositToken(amount: number): Promise<VottunResponse> {
@@ -91,43 +135,9 @@ export async function updatePlan(
   useETH: boolean,
 ): Promise<VottunResponse> {
   return await sendTransaction('updatePlan', [
-    amountPerPeriod.toString(),
-    interval.toString(),
+    amountPerPeriod,
+    interval,
     planName,
     useETH,
   ])
-}
-
-interface VottunResponse {
-  data: any
-}
-
-const VOTTUN_MUTABLE_API_URL =
-  'https://api.vottun.tech/core/v1/evm/transact/mutable'
-
-async function sendTransaction(
-  method: string,
-  params: any[] = [],
-  value: string = '0', // Optional value in wei for sending ETH
-): Promise<VottunResponse> {
-  try {
-    const response = await axios.post(
-      VOTTUN_MUTABLE_API_URL,
-      {
-        contractAddress: BLOCKSTAR_CONTRACT,
-        contractSpecsId: 12240,
-        blockchainNetwork: 421614,
-        sender: SENDER_ADDRESS,
-        method,
-        params,
-        value,
-      },
-      { headers: HEADERS },
-    )
-    console.log(`${method} transaction response:`, response.data)
-    return response.data
-  } catch (error) {
-    console.error(`Error executing ${method} transaction:`, error)
-    throw error
-  }
 }
