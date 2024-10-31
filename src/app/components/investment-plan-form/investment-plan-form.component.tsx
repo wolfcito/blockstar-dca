@@ -29,27 +29,22 @@ export function InvestmentPlanForm() {
 
   const updateStrategy = async () => {
     const numericAmount = Number(amount)
+
     if (!planName || planName.trim() === '') {
-      console.error('Invalid plan name: cannot be empty')
       alert('Invalid plan name: cannot be empty')
       return
     }
+
     if (isNaN(numericAmount) || numericAmount < 0.1) {
-      console.error(
-        'Invalid amount: must be a number greater than or equal to 0.1',
-      )
-      alert('Invalid amount: must be a number greater than or equal to 1')
+      alert('Invalid amount: must be a number greater than or equal to 0.1')
       return
     }
 
-    const validFrequencies = [3600, 86400, 604800, 2592000]
-    if (!validFrequencies.includes(frequency)) {
-      console.error('Invalid frequency: must be one of the predefined values')
-      return
-    }
+    // Convert ETH to wei (e.g., if input is in ETH, convert it)
+    const amountInWei = Math.floor(numericAmount * 1e18) // Convert to number in wei
 
     try {
-      const result = await updatePlan(numericAmount, frequency, planName, true)
+      const result = await updatePlan(amountInWei, frequency, planName, true)
       console.log('Update successful:', result)
     } catch (error) {
       console.error('Error updating strategy:', error)
@@ -237,6 +232,7 @@ export function InvestmentPlanForm() {
               Cancel
             </button>
             <button
+              type="button"
               className="bg-[#f26419] hover:bg-[#f26419]/90 text-white px-4 py-2"
               onClick={updateStrategy}
             >

@@ -17,7 +17,7 @@ export function Loading() {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#0a192f]">
+    <div className="flex items-center justify-center mx-auto my-8 flex-col">
       <div className="flex items-end space-x-2 h-32">
         {[0, 1, 2, 3].map((i) => (
           <motion.div

@@ -13,6 +13,7 @@ import {
 } from '~/app/service'
 import { convertInterval } from '~/lib/utils'
 import { utils } from 'ethers'
+import { Loading } from '~/components/loading'
 
 export function InvestmentPlanOverview() {
   const [namePlan, setNamePlan] = useState('')
@@ -20,8 +21,8 @@ export function InvestmentPlanOverview() {
   const [amountPerPeriod, setAmountPerPeriod] = useState('')
   const [interval, setInterval] = useState(0)
   const [lastPurchaseTime, setLastPurchaseTime] = useState<Date | null>(null)
-
   const [useETH, setUseETH] = useState(false)
+  const [loading, setLoading] = useState(true) // Add loading state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,17 +36,31 @@ export function InvestmentPlanOverview() {
 
         setNamePlan(result1)
         setOwner(result2)
-        setAmountPerPeriod(utils.formatEther(BigInt(result3 || '0'))) // Ensuring result3 is always a valid value
+        setAmountPerPeriod(utils.formatEther(BigInt(result3 || '0')))
         setInterval(result4)
         setLastPurchaseTime(result5 ? new Date(result5 * 1000) : null)
         setUseETH(result6)
       } catch (error) {
         console.error('Error fetching data:', error)
+      } finally {
+        setLoading(false)
       }
     }
 
     fetchData()
   }, [])
+
+  if (loading) {
+    return (
+      <div className="max-w-2xl mx-auto text-white">
+        <h1 className="text-4xl font-bold text-center mb-8">
+          My Automatic Investment Plan
+        </h1>
+
+        <Loading />
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-2xl mx-auto text-white">
@@ -59,11 +74,10 @@ export function InvestmentPlanOverview() {
             <div className="text-2xl font-semibold mb-6">My Portfolio</div>
             <div className="flex gap-2 w-full">
               {useETH ? (
-                <img src="/img/eth.svg" className="w-6 h-6" alt="btc" />
+                <img src="/img/eth.svg" className="w-6 h-6" alt="eth" />
               ) : (
                 <img src="/img/btc.png" className="w-6 h-6" alt="btc" />
               )}
-
               <p className="text-white text-lg font-bold">{namePlan}</p>
             </div>
           </CardTitle>
