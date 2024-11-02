@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DCA Master
 
-## Getting Started
+## Table of Contents
 
-First, run the development server:
+- [About the Project](#about-the-project)
+- [Demo](#demo)
+- [How it Works](#how-it-works)
+- [Built With](#built-with)
+- [Team](#team)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## About the Project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+In a world where financial decisions can be overwhelming and market volatility can generate anxiety, DCA emerges as an innovative and intuitive solution for those who want to build a stronger and more secure financial future.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Our platform is designed to simplify the investment process through Dollar-Cost Averaging (DCA) while accessing valuable lessons in personal finance. DCA Master aims to empower investors of all levels, regardless of their previous experience, by providing them with a clear and accessible path to investing.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<aquí enlace demo>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## How it Works
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+DCA Master is a decentralized application (dApp) that allows users to easily make regular investments through their non-custodial wallets. Built around the Dollar-Cost Averaging (DCA) strategy, this platform offers a robust and long-term approach to managing volatility in the cryptocurrency markets.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+With DCA Master, there’s no need to monitor markets closely to time purchases. Users can automate their investments based on their own criteria, providing greater control and ease of management. Our mission is to offer the necessary tools and educational resources to empower users to build diversified, resilient investment portfolios.
+
+### Goals
+
+The smart contracts of DCA Master are built with two primary goals:
+
+1. **Enable Automatic Investments**: Allow users to automate investments according to their individual preferences in a user-friendly interface.
+2. **Provide Financial Education**: Empower users to understand and leverage DCA strategies, even if they’re new to investment methods, enabling them to make informed financial decisions.
+
+### Components
+
+The project’s smart contracts include:
+
+- **DCAPlan Contract**: The core of the DCA Master platform, designed to automate investments in wBTC or ETH based on a fixed amount and interval.
+  - **Functions**:
+    - **deposit**: Allows ETH deposits if the DCA plan is set to use ETH.
+    - **depositToken**: For wBTC plans, enables the deposit of wBTC tokens by transferring from the owner’s address to the contract.
+    - **executeDCA**: Executes the DCA operation, transferring either ETH or wBTC to a specified recipient based on the last purchase time and defined interval.
+    - **updatePlan**: Allows updating the plan’s settings, including amount per period, interval, plan name, and asset type (ETH or wBTC).
+  - **Modifiers**:
+    - **onlyOwner**: Restricts certain functions to the plan owner, ensuring that only authorized users can make updates or execute purchases.
+
+### User Journey
+
+1. **Onboarding**: Users navigate to [https://blockstar-dca.vercel.app/](https://blockstar-dca.vercel.app/), connect their wallet, and begin the setup process.
+2. **Plan Setup**: Users fill out a simple form to configure their DCA preferences, including investment amount, frequency, and asset type (ETH or wBTC), ensuring a smooth and user-friendly experience.
+3. **Validation and Confirmation**: After verifying their information, users confirm their DCA plan, which then operates on a recurring basis without further user input.
+
+---
+
+## Built With
+
+- **Vottun’s APIs**: Facilitates seamless integration with blockchain infrastructure for secure, decentralized transactions.
+- **Arbitrum Sepolia**: Utilized as the blockchain network to enhance speed and scalability.
+
+### Why Did Your Team Choose These Approaches?
+
+We aim to transform people’s relationship with money and investments, providing them with a solution that reduces the fear and uncertainty often associated with the financial world. DCA Master is designed to help every investor take control of their finances, enjoy the investment process, and ultimately achieve their financial goals in a sustainable way.
+
+---
+
+## Experience Developing with Vottun APIs
+
+Our experience integrating Vottun APIs was generally smooth, though a bit unconventional for developers accustomed to different workflows. By offloading complex blockchain interactions to Vottun’s APIs, we streamlined development and focused on creating a user-friendly interface.
+
+We did encounter minor issues, such as incorrect reads that required redeploying the smart contract and regenerating an API key due to a typo, but working with TypeScript significantly improved the overall experience. As a suggestion, adding a simple “Hello World” example for reading and writing on the blockchain would exponentially aid developer adoption.
+
+---
+
+## Team
+
+- **Luis Fernando Ushiña (Wolfcito)** – Software Developer  
+  I'm Luis Fernando, also known as Wolfcito, a crypto enthusiast from Ecuador. I’m a Software Developer Architect with a strong passion for Web3 and Blockchain technologies, bringing several years of experience in full-stack development.
+
+---
+
+## Repository and Social Links
+
+- **GitHub Repository**: [https://github.com/wolfcito/blockstar-dca](https://github.com/wolfcito/blockstar-dca)
+- [Agregar redes sociales si hay otras adicionales a GitHub]
