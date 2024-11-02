@@ -1,7 +1,5 @@
 import axios from 'axios'
-
-const BLOCKSTAR_CONTRACT = '0xc760B2a742618AdE9eBFb49023eDF4DfcC6E208d'
-const SENDER_ADDRESS = '0x8306a15c09e4704c340a58Af451E640E7D399a1e'
+import { ADDRESS_OWNER, BLOCKSTAR_CONTRACT } from '~/lib/utils'
 
 const VOTTUN_VIEW_API_URL = 'https://api.vottun.tech/core/v1/evm/transact/view'
 const VOTTUN_MUTABLE_API_URL =
@@ -28,7 +26,7 @@ async function queryContract(
         contractAddress: BLOCKSTAR_CONTRACT,
         contractSpecsId: 12240,
         blockchainNetwork: 421614,
-        sender: SENDER_ADDRESS,
+        sender: ADDRESS_OWNER,
         method,
         params,
       },
@@ -55,7 +53,7 @@ async function sendTransaction(
         contractAddress: BLOCKSTAR_CONTRACT,
         contractSpecsId: 12240,
         blockchainNetwork: 421614,
-        sender: SENDER_ADDRESS,
+        sender: ADDRESS_OWNER,
         method,
         params,
         value, // Now using an integer for value
