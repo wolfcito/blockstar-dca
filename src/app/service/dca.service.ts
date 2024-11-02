@@ -34,7 +34,7 @@ async function queryContract(
       },
       { headers: HEADERS },
     )
-    console.log(`${method} response:`, response)
+    // console.log(`${method} response:`, response)
     return response
   } catch (error) {
     console.error(`Error fetching ${method}:`, error)
@@ -62,7 +62,7 @@ async function sendTransaction(
       },
       { headers: HEADERS },
     )
-    console.log(`${method} transaction response:`, response)
+    // console.log(`${method} transaction response:`, response)
     return response
   } catch (error) {
     if (axios.isAxiosError(error)) {
