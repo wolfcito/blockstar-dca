@@ -20,6 +20,18 @@ export const truncateAddress = (address: string) => {
   return `${address.slice(0, 6)}...${address.slice(-4)}`
 }
 
+export const formatTime = (timeInSeconds: number) => {
+  const hours = Math.floor(timeInSeconds / 3600)
+    .toString()
+    .padStart(2, '0')
+  const minutes = Math.floor((timeInSeconds % 3600) / 60)
+    .toString()
+    .padStart(2, '0')
+  const seconds = (timeInSeconds % 60).toString().padStart(2, '0')
+
+  return `${hours}:${minutes}:${seconds}`
+}
+
 export const ADDRESS_OWNER = '0x8306a15c09e4704c340a58Af451E640E7D399a1e'
 
 export const BLOCKSTAR_CONTRACT = '0xc760B2a742618AdE9eBFb49023eDF4DfcC6E208d'
