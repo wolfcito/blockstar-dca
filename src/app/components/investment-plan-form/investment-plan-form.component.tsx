@@ -9,7 +9,6 @@ import {
 } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { DCASuccess } from '~/components/plan-confirmation'
-import { updatePlan } from '~/app/service'
 
 const people = [
   {
@@ -19,38 +18,13 @@ const people = [
   },
 ]
 
-const DAILY = 86400
+const DAILY = 'daily'
 export function InvestmentPlanForm() {
   const [selected, setSelected] = useState(people[0])
   const [showSuccess, setShowSuccess] = useState(false)
   const [planName, setPlanName] = useState('')
   const [frequency, setFrequency] = useState(DAILY)
   const [amount, setAmount] = useState('')
-
-  const updateStrategy = async () => {
-    const numericAmount = Number(amount)
-
-    if (!planName || planName.trim() === '') {
-      alert('Invalid plan name: cannot be empty')
-      return
-    }
-
-    if (isNaN(numericAmount) || numericAmount < 0.1) {
-      alert('Invalid amount: must be a number greater than or equal to 0.1')
-      return
-    }
-
-    // Convert ETH to wei (e.g., if input is in ETH, convert it)
-    const amountInWei = Math.floor(numericAmount * 1e18) // Convert to number in wei
-
-    try {
-      const result = await updatePlan(amountInWei, frequency, planName, true)
-      console.log('Update successful:', result)
-    } catch (error) {
-      console.error('Error updating strategy:', error)
-    }
-    setShowSuccess(true)
-  }
 
   const handleAmountChange = (event: any) => {
     const value = event.target.value
@@ -62,28 +36,28 @@ export function InvestmentPlanForm() {
     }
   }
 
-  const handleFrequencyChange = (event: any) => {
-    const value = event.target.value
-    switch (value) {
-      case 'hourly':
-        setFrequency(3600)
-        break
-      case 'daily':
-        setFrequency(86400)
-        break
-      case 'weekly':
-        setFrequency(604800)
-        break
-      case 'monthly':
-        setFrequency(2592000)
-        break
-      default:
-        setFrequency(86400)
+  const planConfirmation = () => {
+    const numericAmount = Number(amount)
+    console.log('Plan confirmation')
+    if (!planName || planName.trim() === '') {
+      alert('Invalid plan name: cannot be empty')
+      return
     }
+
+    if (isNaN(numericAmount) || numericAmount < 0.1) {
+      alert('Invalid amount: must be a number greater than or equal to 0.1')
+      return
+    }
+
+    setShowSuccess(
+      frequency.length > 0 && amount.length > 0 && planName.length > 0,
+    )
   }
 
   if (showSuccess) {
-    return <DCASuccess />
+    return (
+      <DCASuccess frecuency={frequency} amount={amount} planName={planName} />
+    )
   }
 
   return (
@@ -111,7 +85,7 @@ export function InvestmentPlanForm() {
               <input
                 id="plan-name"
                 className="w-full bg-[#0a192f] border-[#f26419] text-white placeholder-gray-500 p-2 outline outline-[#f26419]"
-                placeholder="Create a plan here (Optional)"
+                placeholder="Create a plan here"
                 value={planName}
                 onChange={(e) => setPlanName(e.target.value)}
               />
@@ -208,16 +182,8 @@ export function InvestmentPlanForm() {
               <select
                 id="frequency"
                 name="frequency"
-                value={
-                  frequency === 3600
-                    ? 'hourly'
-                    : frequency === 86400
-                    ? 'daily'
-                    : frequency === 604800
-                    ? 'weekly'
-                    : 'monthly'
-                }
-                onChange={handleFrequencyChange}
+                value={frequency}
+                onChange={(e) => setFrequency(e.target.value)}
                 className="w-full bg-[#0a192f] border-[#f26419] text-white p-2.5 outline outline-[#f26419]"
               >
                 <option value="hourly">Hourly</option>
@@ -234,7 +200,7 @@ export function InvestmentPlanForm() {
             <button
               type="button"
               className="bg-[#f26419] hover:bg-[#f26419]/90 text-white px-4 py-2"
-              onClick={updateStrategy}
+              onClick={planConfirmation}
             >
               Next
             </button>
