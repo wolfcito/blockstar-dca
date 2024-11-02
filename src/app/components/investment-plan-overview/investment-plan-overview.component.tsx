@@ -14,8 +14,7 @@ import {
 
 import { utils } from 'ethers'
 import { Loading } from '~/components/loading'
-
-import { convertInterval } from '~/lib/utils'
+import { convertInterval, formatTime } from '~/lib/utils'
 
 export function InvestmentPlanOverview() {
   const [namePlan, setNamePlan] = useState('')
@@ -78,14 +77,6 @@ export function InvestmentPlanOverview() {
 
     fetchInitialTime()
   }, [])
-
-  const formatTime = (timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60)
-      .toString()
-      .padStart(2, '0')
-    const seconds = (timeInSeconds % 60).toString().padStart(2, '0')
-    return `${minutes}:${seconds}`
-  }
 
   if (loading) {
     return (
