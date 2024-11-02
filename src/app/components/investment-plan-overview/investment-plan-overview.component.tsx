@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
-import { HelpCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import {
   getAmountPerPeriod,
@@ -11,9 +10,11 @@ import {
   getOwner,
   getUseETH,
 } from '~/app/service'
-import { convertInterval } from '~/lib/utils'
+
 import { utils } from 'ethers'
 import { Loading } from '~/components/loading'
+import { getUSDTtoETH, getUSDTtoUSD } from '~/app/service'
+import { convertInterval } from '~/lib/utils'
 
 export function InvestmentPlanOverview() {
   const [namePlan, setNamePlan] = useState('')
@@ -22,7 +23,9 @@ export function InvestmentPlanOverview() {
   const [interval, setInterval] = useState(0)
   const [lastPurchaseTime, setLastPurchaseTime] = useState<Date | null>(null)
   const [useETH, setUseETH] = useState(false)
-  const [loading, setLoading] = useState(true) // Add loading state
+  const [loading, setLoading] = useState(true)
+  const [amountUSDtoETH, setAmountUSDtoETH] = useState('')
+  const [amountUSDTtoUSD, setAmountUSDTtoUSD] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,9 +37,15 @@ export function InvestmentPlanOverview() {
         const result5 = await getLastPurchaseTime()
         const result6 = await getUseETH()
 
+        const valueAmount = utils.formatEther(BigInt(result3 || '0'))
+        const usdtToEthRate = await getUSDTtoETH(Number(valueAmount))
+        const usdtToUSD = await getUSDTtoUSD(Number(valueAmount))
+        console.log('result4', typeof result4, result4)
+        setAmountUSDTtoUSD(usdtToUSD.toString())
+        setAmountUSDtoETH(usdtToEthRate.toString())
         setNamePlan(result1)
         setOwner(result2)
-        setAmountPerPeriod(utils.formatEther(BigInt(result3 || '0')))
+        setAmountPerPeriod(valueAmount)
         setInterval(result4)
         setLastPurchaseTime(result5 ? new Date(result5 * 1000) : null)
         setUseETH(result6)
@@ -85,9 +94,9 @@ export function InvestmentPlanOverview() {
         <CardContent className="space-y-4 text-white">
           <div className="mt-4 text-white flex flex-col gap-2">
             <p className="text-white text-right">
-              {`Invest ${amountPerPeriod} ${
-                useETH ? 'ETH' : 'wBTC'
-              } every ${convertInterval(interval)}`}
+              {`Invest ${amountPerPeriod} USDT every ${convertInterval(
+                interval,
+              )}`}
             </p>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Owner</span>
@@ -102,11 +111,12 @@ export function InvestmentPlanOverview() {
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-1">
                 <span className="text-gray-400">Total Invested</span>
-                <HelpCircle className="h-3 w-3 text-gray-400" />
               </div>
-              <span className="font-semibold">≈ 10 USDT</span>
+              <span className="font-semibold">{`${amountPerPeriod} USDT`}</span>
             </div>
-            <div className="text-right text-gray-400">≈ 10 USD</div>
+
+            <div className="text-right text-gray-400">{`≈ ${amountUSDTtoUSD} USD`}</div>
+            <div className="text-right text-gray-400">{`≈ ${amountUSDtoETH} ETH`}</div>
           </div>
         </CardContent>
       </Card>
