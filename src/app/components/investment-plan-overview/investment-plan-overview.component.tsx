@@ -26,6 +26,8 @@ export function InvestmentPlanOverview() {
   const [loading, setLoading] = useState(true)
   const [amountUSDtoETH, setAmountUSDtoETH] = useState('')
   const [amountUSDTtoUSD, setAmountUSDTtoUSD] = useState('')
+  const initialTime = 10
+  const [remainingTime, setRemainingTime] = useState(initialTime)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +58,34 @@ export function InvestmentPlanOverview() {
 
     fetchData()
   }, [])
+
+  useEffect(() => {
+    const fetchInitialTime = async () => {
+      const time = await getInterval()
+      setRemainingTime(time)
+      const intervalId = window.setInterval(() => {
+        setRemainingTime((prevTime) => {
+          if (prevTime <= 1) {
+            console.log('Actualizando...')
+            return time
+          }
+          return prevTime - 1
+        })
+      }, 1000)
+
+      return () => clearInterval(intervalId)
+    }
+
+    fetchInitialTime()
+  }, [])
+
+  const formatTime = (timeInSeconds: number) => {
+    const minutes = Math.floor(timeInSeconds / 60)
+      .toString()
+      .padStart(2, '0')
+    const seconds = (timeInSeconds % 60).toString().padStart(2, '0')
+    return `${minutes}:${seconds}`
+  }
 
   if (loading) {
     return (
@@ -144,7 +174,9 @@ export function InvestmentPlanOverview() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">23:45</div>
+              <div className="text-2xl font-bold">
+                {formatTime(remainingTime)}
+              </div>
               <p className="text-xs text-muted-foreground">Minutes remaining</p>
             </CardContent>
           </Card>
