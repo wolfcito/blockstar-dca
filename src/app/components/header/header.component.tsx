@@ -35,9 +35,9 @@ export function Header() {
               <li className="hover:text-[#f26419]">
                 <Link href="/calculator">Calculator</Link>
               </li>
-              <li className="hover:text-[#f26419]">
+              {/* <li className="hover:text-[#f26419]">
                 <Link href="/challenges">Challenges</Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>
@@ -85,11 +85,11 @@ export function Header() {
                 Calculator
               </Link>
             </li>
-            <li className="hover:text-[#f26419] w-full lg:w-auto">
+            {/* <li className="hover:text-[#f26419] w-full lg:w-auto">
               <Link href="/challenges" className="block py-2">
                 Challenges
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <div className="relative mb-4">
