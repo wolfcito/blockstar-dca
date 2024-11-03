@@ -12,9 +12,9 @@
 
 ## About the Project
 
-In a world where financial decisions can be overwhelming and market volatility can generate anxiety, DCA emerges as an innovative and intuitive solution for those who want to build a stronger and more secure financial future.
+In a context where financial decisions can be overwhelming and market volatility can lead to uncertainty, DCA emerges as an innovative and intuitive solution for those who want to build a stronger and more secure financial future.
 
-Our platform is designed to simplify the investment process through Dollar-Cost Averaging (DCA) while accessing valuable lessons in personal finance. DCA Master aims to empower investors of all levels, regardless of their previous experience, by providing them with a clear and accessible path to investing.
+Our platform is designed to simplify the investment process through Dollar-Cost Averaging (DCA), while learning about investing and personal finance through our in-app lessons. DCA Master aims to empower investors of all levels, regardless of their previous experience, by providing them with a clear and accessible path to investing.
 
 ---
 
