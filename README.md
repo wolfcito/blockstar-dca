@@ -79,17 +79,17 @@ We did encounter minor issues, such as incorrect reads that required redeploying
 
 ## Team
 
-- **[María Fernanda López](https://x.com/Soymaferlopezp)** - Designer
+- **[María Fernanda López](https://x.com/Soymaferlopezp)** - Designer\
   I'm a Informatic engineer, Co-founder of Dosis Web3 and Ambassador Push Protocol Latam
 
-- **[Luis Fernando Ushiña(Wolfcito)](https://x.com/akawolfcito)** – Software Developer
-  I'm Luis Fernando, also known as Wolfcito, a crypto enthusiast from Ecuador. I’m a Software Developer Architect with a strong passion for Web3 and Blockchain technologies, bringing several years of experience in full-stack development.
-
-- **Krizula Metropulos** - Researcher.
+- **[Krizula Metropulos](https://x.com/Zulakyz)** - Researcher\
   I’m a Computer engineer, crypto enthusiast and Co-founder of [@100DiasDeR](https://x.com/100diasder) an educational community about blockchain and Web3.
 
-- **Margy Aramendiz** - Project management.
+- **[Margy Aramendiz](https://x.com/maaadiz3)** - Project management\
   Crypto-enthusiast & Co-Founder 100 dias de research.
+
+- **[Luis Fernando Ushiña(Wolfcito)](https://x.com/akawolfcito)** – Software Developer Engineer\
+   A.K.A. Wolfcito, [ModeSpray's](https://x.com/ModeSpray) Founder, crypto enthusiast from Ecuador with a strong passion for Web3 and Blockchain technologies, bringing several years of experience in full-stack development.
 
 ---
 
