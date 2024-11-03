@@ -63,9 +63,9 @@ export function InvestmentPlanForm() {
   return (
     <>
       <h1 className="text-4xl font-bold text-center mb-8">
-        Begin to learn
+        Unlock you
         <br />
-        how to invest wisely
+        Financial Potencial
       </h1>
       <div className="bg-[#06101A] p-6 max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Create your DCA's plan</h2>
