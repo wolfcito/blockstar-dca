@@ -79,12 +79,20 @@ We did encounter minor issues, such as incorrect reads that required redeploying
 
 ## Team
 
-- **Luis Fernando Ushiña (Wolfcito)** – Software Developer  
+- **[María Fernanda López](https://x.com/Soymaferlopezp)** - Designer
+  I'm a Informatic engineer, Co-founder of Dosis Web3 and Ambassador Push Protocol Latam
+
+- **[Luis Fernando Ushiña(Wolfcito)](https://x.com/akawolfcito)** – Software Developer
   I'm Luis Fernando, also known as Wolfcito, a crypto enthusiast from Ecuador. I’m a Software Developer Architect with a strong passion for Web3 and Blockchain technologies, bringing several years of experience in full-stack development.
+
+- **Krizula Metropulos** - Researcher.
+  I’m a Computer engineer, crypto enthusiast and Co-founder of [@100DiasDeR](https://x.com/100diasder) an educational community about blockchain and Web3.
+
+- **Margy Aramendiz** - Project management.
+  Crypto-enthusiast & Co-Founder 100 dias de research.
 
 ---
 
 ## Repository and Social Links
 
 - **GitHub Repository**: [https://github.com/wolfcito/blockstar-dca](https://github.com/wolfcito/blockstar-dca)
-- [Agregar redes sociales si hay otras adicionales a GitHub]
