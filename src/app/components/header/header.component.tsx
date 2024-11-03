@@ -113,9 +113,9 @@ export function Header() {
               <span className="sr-only">Copy address</span>
             </Button>
           </div>
-          <button className="bg-[#f26419] hover:bg-[#f26419]/90 text-white px-4 py-2">
+          {/* <button className="bg-[#f26419] hover:bg-[#f26419]/90 text-white px-4 py-2">
             Connect Wallet
-          </button>
+          </button>*/}
         </div>
       </div>
     </header>
