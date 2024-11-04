@@ -20,7 +20,7 @@ Our platform is designed to simplify the investment process through Dollar-Cost 
 
 ## Demo
 
-<aquí enlace demo>
+[Demo](https://www.canva.com/design/DAGVdi0RkHI/8JJATMuFYnbikA9T7wtMUg/watch)
 
 ---
 
